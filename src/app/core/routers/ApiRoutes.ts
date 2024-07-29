@@ -6,8 +6,8 @@ export const ApiRoutes = {
       },
     Student: {
         getAllStudent: "/Student/Get",
-        addStudent: "/Student/Post",
-        editStudent: "/Student/Edit",
+        addStudent: "/Student/POST",
+        editStudent: "/Student/PUT",
         getStudentById: "/Student/GetByID",
         deleteStudent: "/Student/Delete",
       },
