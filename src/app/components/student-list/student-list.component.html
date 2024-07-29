@@ -1,1 +1,100 @@
-<p>student-list works!</p>
+<div class="container my-2 ">
+    <div class="d-flex justify-content-center align-items-center ">
+        <div class="col col-12 col-md-6 d-flex justify-content-center">
+            <input 
+              type="text" 
+              class="form-control w-75" 
+              placeholder="Search for student..." 
+              [(ngModel)]="searchQuery" 
+              (input)="onSearch()"
+            >
+        </div>
+        <div class="col col-12 col-md-6 d-flex justify-content-end">
+            <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#studentModal">
+                <i class="fas fa-plus"></i> Add new student
+            </a>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="isloading" class="d-flex justify-content-center">
+    <app-spinner></app-spinner>
+</div>
+
+<div *ngIf="filteredStudents.length > 0; else noData" class="container mt-3">
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Mobile</th>
+                <th>Email</th>
+                <th>National ID</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let student of filteredStudents; let i=index">
+                <td>{{ student.ID }}</td>
+                <td>{{ student.Name }}</td>
+                <td>{{ student.Mobile }}</td>
+                <td>{{ student.Email }}</td>
+                <td>{{ student.NationalID }}</td>
+                <td class="text-center">
+                    <button class="btn btn-outline-primary" (click)="editStudent(student.ID)">
+                        <i class="fas fa-edit px-3"></i>
+                    </button> |
+                    <button class="btn btn-outline-danger" (click)="DeleteStudent(student.ID)">
+                        <i class="fas fa-trash-alt px-3"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<ng-template #noData>
+    <div *ngIf="!isloading" class="container mt-3 d-flex justify-content-center text-warning">
+        <h2>No students found &#9785;</h2>
+    </div>
+</ng-template>
+
+<div class="modal fade" id="studentModal" tabindex="-1" aria-labelledby="studentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="studentModalLabel">Add New Student</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="AddStudentFrom" (ngSubmit)="onSubmit()">
+                    <div class="mb-3">
+                        <label for="FirstName" class="form-label">FirstName</label>
+                        <input type="text" class="form-control" formControlName="FirstName" placeholder="" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="LastName" class="form-label">LastName</label>
+                        <input type="text" class="form-control" formControlName="LastName" placeholder="" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Mobile" class="form-label">Mobile</label>
+                        <input type="text" class="form-control" formControlName="Mobile">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Email" class="form-label">Email</label>
+                        <input type="email" class="form-control" formControlName="Email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="NationalID" class="form-label">National ID</label>
+                        <input type="text" class="form-control" formControlName="NationalID">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Age" class="form-label">Age</label>
+                        <input type="number" class="form-control" formControlName="Age">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Student</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
