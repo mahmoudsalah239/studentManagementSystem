@@ -1,6 +1,6 @@
 export const ApiRoutes = {
     account: {
-        login: " /User/Login",
+        login: "/User/Login",
         register: "/User/POST",
         logout: "/User/Logout"
       },
