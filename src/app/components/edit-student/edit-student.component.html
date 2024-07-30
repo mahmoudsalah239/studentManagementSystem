@@ -1,54 +1,55 @@
 <div class="container mt-5">
-  <h2 class="mb-4 text-center">Edit Student</h2>
+  <h2 class="mb-4 text-center">{{'Edit Student'|translate}}</h2>
   <form [formGroup]="editStudentForm" (ngSubmit)="onSubmit()" class="form-custom">
     <div class="row">
       <div class="col-md-6 mb-3">
-        <label for="ID" class="form-label">ID</label>
+        <label for="ID" class="form-label">{{'ID'|translate}}</label>
         <input type="text" id="ID" class="form-control" [formControl]="editStudentForm.controls.ID" placeholder="Student ID">
       </div>
       <div class="col-md-6 mb-3">
-        <label for="NameEnglish" class="form-label">Name (English)</label>
+        <label for="NameEnglish" class="form-label">{{"Name (English)"|translate}}</label>
         <input type="text" id="NameEnglish" class="form-control" [formControl]="editStudentForm.controls.NameEnglish" placeholder="Name in English">
       </div>
     </div>
     <div class="row">
       <div class="col-md-6 mb-3">
-        <label for="NameArabic" class="form-label">Name (Arabic)</label>
+        <label for="NameArabic" class="form-label">{{"Name (Arabic)"|translate}}</label>
         <input type="text" id="NameArabic" class="form-control" [formControl]="editStudentForm.controls.NameArabic" placeholder="Name in Arabic">
       </div>
       <div class="col-md-6 mb-3">
-        <label for="FirstName" class="form-label">First Name</label>
+        <label for="FirstName" class="form-label">{{"First Name"|translate}}</label>
         <input type="text" id="FirstName" class="form-control" [formControl]="editStudentForm.controls.FirstName" placeholder="First Name">
       </div>
     </div>
     <div class="row">
       <div class="col-md-6 mb-3">
-        <label for="LastName" class="form-label">Last Name</label>
+        <label for="LastName" class="form-label">{{"Last Name"|translate}}</label>
         <input type="text" id="LastName" class="form-control" [formControl]="editStudentForm.controls.LastName" placeholder="Last Name">
       </div>
       <div class="col-md-6 mb-3">
-        <label for="Mobile" class="form-label">Mobile</label>
+        <label for="Mobile" class="form-label">{{"Mobile"|translate}}</label>
         <input type="text" id="Mobile" class="form-control" [formControl]="editStudentForm.controls.Mobile" placeholder="Mobile Number">
       </div>
     </div>
     <div class="row">
       <div class="col-md-6 mb-3">
-        <label for="Email" class="form-label">Email</label>
+        <label for="Email" class="form-label">{{"Email"|translate}}</label>
         <input type="email" id="Email" class="form-control" [formControl]="editStudentForm.controls.Email" placeholder="Email Address">
       </div>
       <div class="col-md-6 mb-3">
-        <label for="NationalID" class="form-label">National ID</label>
+        <label for="NationalID" class="form-label">{{"National ID"|translate}}</label>
         <input type="text" id="NationalID" class="form-control" [formControl]="editStudentForm.controls.NationalID" placeholder="National ID">
       </div>
     </div>
     <div class="row">
       <div class="col-md-6 mb-3">
-        <label for="Age" class="form-label">Age</label>
+        <label for="Age" class="form-label">{{"Age"|translate}}</label>
         <input type="number" id="Age" class="form-control" [formControl]="editStudentForm.controls.Age" placeholder="Age">
       </div>
     </div>
     <div class="d-flex justify-content-center">
-      <button type="submit" class="btn btn-custom">Save Changes</button>
+      <button type="submit" class="btn btn-custom">{{"Save Changes"|translate}}</button>
+      <button  class="btn btn-secondary mx-2" routerLink="/student" >{{"Back"|translate}}</button>
     </div>
   </form>
 </div>

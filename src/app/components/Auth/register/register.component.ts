@@ -10,13 +10,14 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import Swal from 'sweetalert2';
-import { Router } from '@angular/router';
-
+import { Router, RouterLink } from '@angular/router';
+  import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
-  templateUrl: './register.component.html',
+  imports: [ReactiveFormsModule,TranslateModule,RouterLink, CommonModule],
+
+templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
 export class RegisterComponent {

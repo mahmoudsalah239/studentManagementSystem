@@ -8,13 +8,15 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import Swal from 'sweetalert2';
-import { Router } from '@angular/router';
-
+import { Router, RouterLink } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+  
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
-  templateUrl: './login.component.html',
+  imports: [ReactiveFormsModule, CommonModule,TranslateModule,RouterLink],
+
+templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
@@ -29,7 +31,7 @@ export class LoginComponent {
   initloginFrom() {
     return this.fb.group({
       UserName: this.fb.control<string>('', [Validators.required]),
-      Password: this.fb.control<string>('', [Validators.required]),
+      Password: this.fb.control<string>('', [Validators.required,Validators.minLength(6)]),
     });
   }
 

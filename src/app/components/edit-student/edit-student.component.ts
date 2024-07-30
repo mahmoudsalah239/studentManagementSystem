@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { StudentService } from '../../services/student.service';
 import Swal from 'sweetalert2';
-
-
+  import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-edit-student',
   standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './edit-student.component.html',
+  imports: [ReactiveFormsModule,TranslateModule,RouterLink],
+
+templateUrl: './edit-student.component.html',
   styleUrl: './edit-student.component.scss'
 })
-export class EditStudentComponent {
+export class EditStudentComponent implements OnInit {
  editStudentForm=this.initEditStudentForm() ;
   studentId!: number;
 
@@ -22,6 +22,7 @@ export class EditStudentComponent {
     private route: ActivatedRoute,
     private _router: Router,
     private _studentService: StudentService,
+    private _translateService:TranslateService
 
   ) {
     
@@ -30,6 +31,9 @@ export class EditStudentComponent {
   }
 
   ngOnInit() {
+    const lang = localStorage.getItem('language') || 'en';
+    this._translateService.setDefaultLang(lang);
+    this._translateService.use(lang);
     this._studentService.getStudentById(this.studentId).
     subscribe({
       next: (res) => {
