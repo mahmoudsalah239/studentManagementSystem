@@ -14,14 +14,13 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
   styleUrls: ['./header.component.css'], // Fixed typo from styleUrl to styleUrls
 })
 export class HeaderComponent implements OnInit {
-
   selectedLanguage: string = '';
   isLogin: boolean = false;
-  systemUser: string = 'System User';
+  systemUser: string = '';
   profileImageUrl: string = '../../../assets/Images/download.png';
 
   constructor(
-    private authService: AuthService, 
+    private authService: AuthService,
     private router: Router,
     private languageService: LanguageService,
     private translateService: TranslateService
@@ -29,16 +28,18 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.selectedLanguage = localStorage.getItem('language') || 'en';
+    this.systemUser = localStorage.getItem('systemUser') || 'System User';
     this.languageService.setLanguage(this.selectedLanguage);
     this.translateService.use(this.selectedLanguage);
 
-    this.authService.getIsLoggedIn().subscribe(isLoggedIn => {
+    this.authService.getIsLoggedIn().subscribe((isLoggedIn) => {
       this.isLogin = isLoggedIn;
     });
   }
 
   logout(): void {
     this.authService.LogOut();
+    localStorage.removeItem('systemUser');
     this.router.navigate(['/home']);
   }
 

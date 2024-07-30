@@ -8,11 +8,52 @@ import { RegisterComponent } from './components/Auth/register/register.component
 import { authGuard } from './gards/auth.guard';
 
 export const routes: Routes = [
-    {path:'', redirectTo:"home", pathMatch:"full"},
-    {path:'home',component:HomeComponent},
-    {path:'student',component:StudentListComponent, canActivate: [authGuard]},
-    {path:'student/edit/:id',component:EditStudentComponent , canActivate: [authGuard]},
-    {path:'login',component:LoginComponent},
-    {path:'register',component:RegisterComponent},
-    {path:'**',component:NotFoundComponent},
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  {
+    path: 'home',
+    loadComponent: () =>
+      import('./components/home/home.component').then((m) => m.HomeComponent),
+    title: 'Home',
+  },{
+    path: 'student',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./components/student-list/student-list.component').then(
+        (m) => m.StudentListComponent
+      ),
+    title: 'Students',
+  },
+  {
+    path: 'student/edit/:id',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./components/edit-student/edit-student.component').then(
+        (m) => m.EditStudentComponent
+      ),
+    title: 'Edit',
+  },
+  {
+    path: 'login',
+    loadComponent: () =>
+      import('./components/Auth/login/login.component').then(
+        (m) => m.LoginComponent
+      ),
+    title: 'Login',
+  },
+  {
+    path: 'register',
+    loadComponent: () =>
+      import('./components/Auth/register/register.component').then(
+        (m) => m.RegisterComponent
+      ),
+    title: 'Register',
+  },
+  {
+    path: '**',
+    loadComponent: () =>
+      import('./components/not-found/not-found.component').then(
+        (m) => m.NotFoundComponent
+      ),
+    title: 'Not Found',
+  },
 ];
