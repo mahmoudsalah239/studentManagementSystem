@@ -52,15 +52,17 @@ console.log(Data);
         this.isLoading = false;
 
         if (res.Success) {
-          Swal.fire({
-            icon: 'success',
-            title: 'Success',
-            text: res.Message,
-            confirmButtonText: 'OK',
-          }).then(() => {
-            this._AuthService.saveToken(res.Data);
-            this.router.navigate(['/student']);
-          });
+          this._AuthService.saveToken(res.Data);
+          this.router.navigate(['/student']);
+          // Swal.fire({
+          //   icon: 'success',
+          //   title: 'Success',
+          //   text: res.Message,
+          
+          // }).then(() => {
+          //   this._AuthService.saveToken(res.Data);
+          //   this.router.navigate(['/student']);
+          // });
         } else {
           Swal.fire({
             icon: 'error',

@@ -7,10 +7,12 @@ import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angu
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
+
+
 @Component({
   selector: 'app-student-list',
   standalone: true,
-  imports: [SpinnerComponent, CommonModule, ReactiveFormsModule, FormsModule,TranslateModule],
+  imports: [SpinnerComponent, CommonModule, ReactiveFormsModule, FormsModule, TranslateModule],
   templateUrl: './student-list.component.html',
   styleUrls: ['./student-list.component.css'], // Fix styleUrls here
 })
@@ -21,12 +23,12 @@ export class StudentListComponent implements OnInit {
   filteredStudents: IStudent[] = [];
   studentlist: IStudent[] = [];
   AddStudentFrom = this.initAddStudentForm();
+  isSubmitting: boolean = false;
 
   constructor(
     private _StudentService: StudentService,
     private fb: FormBuilder,
     private router: Router,
-    private elRef: ElementRef,
     private _translateService: TranslateService
   ) {}
 
@@ -63,6 +65,12 @@ export class StudentListComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.AddStudentFrom.invalid) {
+      return;
+    }
+
+    this.isSubmitting = true; // Start spinner
+
     const data: IAddStudent = {
       FirstName: String(this.AddStudentFrom.controls.FirstName?.value),
       LastName: String(this.AddStudentFrom.controls.LastName?.value),
@@ -74,35 +82,38 @@ export class StudentListComponent implements OnInit {
 
     this._StudentService.addStudent(data).subscribe({
       next: (res) => {
+        this.isSubmitting = false; // Stop spinner
         if (res.Success) {
+          
           Swal.fire({
             icon: 'success',
-            title: 'Success',
+            title: this._translateService.instant('Success'),
             text: res.Message,
-            confirmButtonText: 'OK'
+            confirmButtonText: this._translateService.instant('OK')
           }).then(() => {
             this.getAllStudent();
-            const modalElement = this.elRef.nativeElement.querySelector('#studentModal');
-            // Correct method to hide the modal
-         //   modal.hide();
+            // Hide modal using Bootstrap 5 JavaScript API
+           
+            
             this.router.navigate(['/student']); // Navigate to StudentListComponent
           });
         } else {
           Swal.fire({
             icon: 'error',
-            title: 'Error',
+            title: this._translateService.instant('Error'),
             text: res.Message,
-            confirmButtonText: 'OK'
+            confirmButtonText: this._translateService.instant('OK')
           });
         }
       },
       error: (err) => {
+        this.isSubmitting = false; // Stop spinner
         console.error(err);
         Swal.fire({
           icon: 'error',
-          title: 'Oops...',
-          text: 'Something went wrong!',
-          confirmButtonText: 'OK'
+          title: this._translateService.instant('Oops...'),
+          text: this._translateService.instant('Something went wrong!'),
+          confirmButtonText: this._translateService.instant('OK')
         });
       }
     });
@@ -113,30 +124,33 @@ export class StudentListComponent implements OnInit {
   }
 
   DeleteStudent(id: number) {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'You will not be able to recover this student!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this._StudentService.DeleteStudent(id).subscribe({
-          next: () => {
-            Swal.fire('Deleted!', 'The student has been deleted.', 'success');
-            this.getAllStudent();
-          },
-          error: (err) => {
-            Swal.fire('Error!', 'There was an error deleting the student.', 'error');
-            console.error('Error deleting student', err);
-          },
+    this._translateService.get(['ARE_YOU_SURE', 'CANNOT_RECOVER', 'YES_DELETE', 'DELETED', 'STUDENT_DELETED', 'ERROR', 'ERROR_DELETING'])
+      .subscribe(translations => {
+        Swal.fire({
+          title: translations['ARE_YOU_SURE'],
+          text: translations['CANNOT_RECOVER'],
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: translations['YES_DELETE'],
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this._StudentService.DeleteStudent(id).subscribe({
+              next: () => {
+                Swal.fire(translations['DELETED'], translations['STUDENT_DELETED'], 'success');
+                this.getAllStudent();
+              },
+              error: (err) => {
+                Swal.fire(translations['ERROR'], translations['ERROR_DELETING'], 'error');
+                console.error('Error deleting student', err);
+              },
+            });
+          }
         });
-      }
-    });
+      });
   }
-
+  
   onSearch(): void {
     const query = this.searchQuery.toLowerCase();
     this.filteredStudents = this.studentlist.filter(student =>
@@ -146,5 +160,4 @@ export class StudentListComponent implements OnInit {
       student.Age.toString().includes(query)
     );
   }
-  
 }
