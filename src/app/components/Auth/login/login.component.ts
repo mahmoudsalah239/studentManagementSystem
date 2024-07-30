@@ -10,13 +10,13 @@ import { AuthService } from '../../../services/auth.service';
 import Swal from 'sweetalert2';
 import { Router, RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-  
+
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule,TranslateModule,RouterLink],
+  imports: [ReactiveFormsModule, CommonModule, TranslateModule, RouterLink],
 
-templateUrl: './login.component.html',
+  templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
@@ -31,7 +31,10 @@ export class LoginComponent {
   initloginFrom() {
     return this.fb.group({
       UserName: this.fb.control<string>('', [Validators.required]),
-      Password: this.fb.control<string>('', [Validators.required,Validators.minLength(6)]),
+      Password: this.fb.control<string>('', [
+        Validators.required,
+        Validators.minLength(6),
+      ]),
     });
   }
 
@@ -45,7 +48,7 @@ export class LoginComponent {
       UserName: this.Loginform.controls.UserName.value,
       Password: this.Loginform.controls.Password.value,
     };
-console.log(Data);
+    console.log(Data);
 
     this._AuthService.Login(Data).subscribe({
       next: (res: any) => {
@@ -53,12 +56,16 @@ console.log(Data);
 
         if (res.Success) {
           this._AuthService.saveToken(res.Data);
+          localStorage.setItem(
+            'systemUser',
+            String(this.Loginform.controls.UserName.value)
+          );
           this.router.navigate(['/student']);
           // Swal.fire({
           //   icon: 'success',
           //   title: 'Success',
           //   text: res.Message,
-          
+
           // }).then(() => {
           //   this._AuthService.saveToken(res.Data);
           //   this.router.navigate(['/student']);
