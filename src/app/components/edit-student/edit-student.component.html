@@ -1,6 +1,9 @@
 <div class="container mt-5">
-  <h2 class="mb-4 text-center">{{'Edit Student'|translate}}</h2>
+  <h2 class="text-center">{{'Edit Student'|translate}}</h2>
   <form [formGroup]="editStudentForm" (ngSubmit)="onSubmit()" class="form-custom">
+    <div class="text-center my-0 w-25 m-auto ">
+      <img src="../../../assets/Images/download.png" class="w-50 m-auto rounded rounded-circle" alt="">
+    </div>
     <div class="row">
       <div class="col-md-6 mb-3">
         <label for="ID" class="form-label">{{'ID'|translate}}</label>

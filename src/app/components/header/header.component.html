@@ -1,59 +1,57 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <img 
-        style="width: 60px;height: 60px;" src="assets/Images/logo.png" alt="">
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-lg-0" >
-          <li class="nav-item mx-3">
-            <a class="nav-link fw-bold" aria-current="page" routerLink="home" routerLinkActive="active">{{'Home'|translate}}</a>
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img style="width: 60px;height: 60px;" src="assets/Images/logo.png" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse " id="navbarSupportedContent">
+      <ul class="direction navbar-nav  mb-lg-0">
+        <li class="nav-item mx-3">
+          <a class="nav-link fw-bold" aria-current="page" routerLink="home"
+            routerLinkActive="active">{{'Home'|translate}}</a>
+        </li>
+        <li class="nav-item" *ngIf="isLogin">
+          <a class="nav-link fw-bold" routerLink="student" routerLinkActive="active">{{ "Students" | translate }}</a>
+        </li>
+      </ul>
+      <ul *ngIf="!isLogin; else logined" class="navbar-nav ">
+        <li class="nav-item">
+          <a class="nav-link fw-bold" routerLink="login" routerLinkActive="active">{{'Login'|translate}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fw-bold" routerLink="register" routerLinkActive="active">{{'Register'|translate}} </a>
+        </li>
+      </ul>
+
+      <ng-template #logined>
+        <ul class="navbar-nav d-flex align-items-end justify-content-start">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle fw-bold" href="#" id="navbarDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              {{ systemUser}} <img class="rounded rounded-circle loginUserImg" [src]="profileImageUrl" alt="">
+            </a>
+            <ul class="dropdown-menu text-end  " aria-labelledby="navbarDropdown" dir="ltr">
+              <li><a class="dropdown-item" (click)="logout()"> {{"logout"|translate}} <i class="fa fa-sign-out"></i></a>
+              </li>
+            </ul>
           </li>
-          <li class="nav-item" *ngIf="isLogin">
-            <a class="nav-link fw-bold" routerLink="student" routerLinkActive="active">{{ "Students" | translate }}</a>
-          </li>
+
         </ul>
-        <ul *ngIf="!isLogin; else logined" class="navbar-nav ">
-          <li class="nav-item">
-            <a class="nav-link fw-bold" routerLink="login" routerLinkActive="active">{{'Login'|translate}}</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link fw-bold" routerLink="register" routerLinkActive="active">{{'Register'|translate}} </a>
-          </li>
-        </ul>
-        <ul>
-          <li class="nav-item dropdown me-1 list-unstyled">
-            <select
-              class="form-select me-3"
-              (change)="changeLanguage($event)"
-              [(ngModel)]="selectedLanguage"
-              id="language-select"
-              aria-label="Select Language"
-            >
-              <option value="en">English</option>
-              <option value="ar">عربي</option>
-            </select>
-          </li>
-        </ul>
-        <ng-template #logined>
-          <ul class="navbar-nav  d-flex align-items-end justify-content-start">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle fw-bold" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                {{ systemUser}} <img class="rounded rounded-circle loginUserImg" [src]="profileImageUrl"
-                  alt="">
-              </a>
-              <ul class="dropdown-menu text-end  " aria-labelledby="navbarDropdown" dir="ltr">
-                <li><a class="dropdown-item" (click)="logout()"> {{"logout"|translate}} <i class="fa fa-sign-out"></i></a></li>
-              </ul>
-            </li>
-            
-          </ul>
-        </ng-template>
-      
-      </div>
+      </ng-template>
+      <ul>
+        <li class="nav-item dropdown list-unstyled">
+          <label class="switch">
+            <input checked="" type="checkbox" class="toggle" type="checkbox" [checked]="selectedLanguage === 'ar'"
+              (change)="onToggleChange($event)">
+            <span class="slider"></span>
+            <span class="card-side"></span>
+          </label>
+        </li>
+      </ul>
+
     </div>
-  </nav>
+  </div>
+</nav>

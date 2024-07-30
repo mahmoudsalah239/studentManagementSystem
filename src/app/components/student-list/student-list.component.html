@@ -31,7 +31,7 @@
             <table class="table table-hover table-striped table-borderless">
                 <thead>
                     <tr>
-                        <th>{{'ID'|translate}}</th>
+                        
                         <th>{{'Name'|translate}}</th>
                         <th>{{'Mobile'|translate}}</th>
                         <th>{{'Email'|translate}}</th>
@@ -40,8 +40,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let student of filteredStudents; let i=index">
-                        <td>{{ student.ID }}</td>
+                    <tr *ngFor="let student of filteredStudents; let i=index">     
                         <td>{{ student.Name }}</td>
                         <td>{{ student.Mobile }}</td>
                         <td>{{ student.Email }}</td>
@@ -85,6 +84,9 @@
             </div>
             <div class="modal-body">
                 <form [formGroup]="AddStudentFrom" (ngSubmit)="onSubmit()">
+                    <div class="text-center my-0 w-25 m-auto ">
+                        <img src="../../../assets/Images/download.png" class="w-50  m-auto rounded rounded-circle" alt="">
+                      </div>
                     <div class="mb-3">
                         <label for="FirstName" class="form-label">{{"FirstName" | translate}}</label>
                         <input type="text" class="form-control" formControlName="FirstName" placeholder="" required>
