@@ -3,8 +3,10 @@
     width: 50px;
     height: 50px;
   }
-  .active {
-    color: orange !important;
+  .navbar-nav .nav-link.active {
+    color: #007bff !important;
+    font-weight: bold !important;
+    background-color: #e9ecef !important;
   }
   .switch {
     --input-focus: #2d8cf0;
