@@ -51,8 +51,8 @@ export class StudentListComponent implements OnInit {
         this.isloading = false;
       },
     });
-  }
-
+  } 
+ 
   initAddStudentForm() {
     return this.fb.group({
       FirstName: this.fb.control<string>('', [Validators.required]),
