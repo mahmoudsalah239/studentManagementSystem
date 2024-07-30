@@ -1,7 +1,7 @@
 {
   "Home": "Home",
   "ID": "ID",
-  "System User":"System user",
+  "System User": "System user",
   "Students": "Students",
   "Student List": "Student List",
   "logout": "logout",
@@ -9,30 +9,29 @@
   "Back": "Back",
   "Name": "Name",
   "FirstName": "FirstName",
-  "LastName": "FirstName",
+  "LastName": "LastName",
   "Age": "Age",
   "Mobile": "Mobile",
   "National ID": "National ID ",
   "Email": "Email",
   "UpdateDetails": "UpdateDetails",
   "Close": "Close",
-  "Welcome to the student management system":"Welcome to the student management system",
-  "Don't have an account?":"Don't have an account?",
-  "Do you have an account?":"Do you have an account?",
-  "Name is required":"Name is required",
-  "Passwords do not match":"Passwords do not match",
-  "Loading...":"Loading...",
-  "Sign up":"Sign up",
+  "Welcome to the student management system": "Welcome to the student management system",
+  "Don't have an account?": "Don't have an account?",
+  "Do you have an account?": "Do you have an account?",
+  "Name is required": "Name is required",
+  "Passwords do not match": "Passwords do not match",
+  "Loading...": "Loading...",
+  "Sign up": "Sign up",
   "Actions": "Actions",
   "UserName": "UserName",
   "Password": "Password",
-  "Confirm Password":"Confirm Password ",
+  "Confirm Password": "Confirm Password ",
   "UserName is required": "UserName is required",
   "Password is required": "Password is required",
   "Login": "Login",
   "Register": "Register",
-  "RegisterNow":"Register Now",
-
+  "RegisterNow": "Register Now",
 
   "ARE_YOU_SURE": "Are you sure?",
   "CANNOT_RECOVER": "You will not be able to recover this student!",
@@ -40,10 +39,9 @@
   "DELETED": "Deleted!",
   "STUDENT_DELETED": "The student has been deleted.",
   "ERROR": "Error!",
-  "ERROR_DELETING": "There was an error deleting the student."
+  "ERROR_DELETING": "There was an error deleting the student.",
 
-  ,
-    "SUCCESS_TITLE": "Success",
+  "SUCCESS_TITLE": "Success",
   "SUCCESS_MESSAGE": "Operation completed successfully.",
   "ERROR_TITLE": "Error",
   "ERROR_MESSAGE": "There was an issue with your request.",
@@ -51,7 +49,7 @@
   "OOPS_MESSAGE": "Something went wrong!",
 
   "Edit Student": "Edit Student",
- 
+
   "Name (English)": "Name (English)",
   "Name (Arabic)": "Name (Arabic)",
   "First Name": "First Name",
@@ -74,9 +72,8 @@
   "Something went wrong!": "Something went wrong!",
   "OK": "OK",
   "SUCCESS": "Success",
- 
+
   "SOMETHING_WENT_WRONG": "Something went wrong!",
   "STUDENT_ADDED_SUCCESSFULLY": "Student added successfully!",
   "STUDENT_ADDITION_FAILED": "Failed to add student."
-
 }

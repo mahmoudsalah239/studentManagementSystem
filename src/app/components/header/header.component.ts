@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  Renderer2,
+} from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { FormsModule } from '@angular/forms';
@@ -13,18 +19,23 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'], // Fixed typo from styleUrl to styleUrls
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, AfterViewInit {
   selectedLanguage: string = '';
   isLogin: boolean = false;
   systemUser: string = '';
   profileImageUrl: string = '../../../assets/Images/download.png';
 
-  constructor(private renderer: Renderer2, private el: ElementRef,
+  constructor(
+    private renderer: Renderer2,
+    private el: ElementRef,
     private authService: AuthService,
     private router: Router,
     private languageService: LanguageService,
     private translateService: TranslateService
   ) {}
+  ngAfterViewInit(): void {
+    this.applyClassBasedOnLanguage();
+  }
 
   ngOnInit(): void {
     this.selectedLanguage = localStorage.getItem('language') || 'en';
@@ -35,27 +46,22 @@ export class HeaderComponent implements OnInit {
     this.authService.getIsLoggedIn().subscribe((isLoggedIn) => {
       this.isLogin = isLoggedIn;
     });
-    this.applyClassBasedOnLanguage();
 
   }
 
   applyClassBasedOnLanguage(): void {
-    // قراءة اللغة من localStorage
-    const language = localStorage.getItem('language') || 'en'; // افتراضي 'en' إذا لم تكن موجودة
-console.log(
-  language
-);
-
-    // تحديد الكلاس بناءً على اللغة
+    const language = localStorage.getItem('language') || 'en';
     let className = '';
     if (language == 'ar') {
       className = 'ms-auto';
-    } else if(language == 'en') {
+    } else if (language == 'en') {
       className = 'me-auto';
     }
 
-    // إضافة الكلاس إلى العنصر
-    this.renderer.addClass(this.el.nativeElement.querySelector('.direction'), className);
+    this.renderer.addClass(
+      this.el.nativeElement.querySelector('.direction'),
+      className
+    );
   }
 
   logout(): void {
@@ -69,9 +75,7 @@ console.log(
     this.selectedLanguage = selectedLang;
     this.storeLanguage(selectedLang);
     this.updateLanguage(selectedLang);
-    this.applyClassBasedOnLanguage();
 
-    
   }
 
   onToggleChange(event: Event): void {
@@ -80,6 +84,7 @@ console.log(
     this.selectedLanguage = selectedLang;
     this.storeLanguage(selectedLang);
     this.updateLanguage(selectedLang);
+    this.applyClassBasedOnLanguage();
   }
 
   private storeLanguage(language: string): void {
