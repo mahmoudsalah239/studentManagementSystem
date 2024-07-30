@@ -31,5 +31,52 @@
   "Password is required": "Password is required",
   "Login": "Login",
   "Register": "Register",
-  "RegisterNow":"Register Now"
+  "RegisterNow":"Register Now",
+
+
+  "ARE_YOU_SURE": "Are you sure?",
+  "CANNOT_RECOVER": "You will not be able to recover this student!",
+  "YES_DELETE": "Yes, delete it!",
+  "DELETED": "Deleted!",
+  "STUDENT_DELETED": "The student has been deleted.",
+  "ERROR": "Error!",
+  "ERROR_DELETING": "There was an error deleting the student."
+
+  ,
+    "SUCCESS_TITLE": "Success",
+  "SUCCESS_MESSAGE": "Operation completed successfully.",
+  "ERROR_TITLE": "Error",
+  "ERROR_MESSAGE": "There was an issue with your request.",
+  "OOPS_TITLE": "Oops...",
+  "OOPS_MESSAGE": "Something went wrong!",
+
+  "Edit Student": "Edit Student",
+ 
+  "Name (English)": "Name (English)",
+  "Name (Arabic)": "Name (Arabic)",
+  "First Name": "First Name",
+  "Last Name": "Last Name",
+
+  "ID is required.": "ID is required.",
+  "Name in English is required.": "Name in English is required.",
+  "Name in Arabic is required.": "Name in Arabic is required.",
+  "First Name is required.": "First Name is required.",
+  "Last Name is required.": "Last Name is required.",
+  "Mobile Number is required.": "Mobile Number is required.",
+  "Email is required and must be a valid email.": "Email is required and must be a valid email.",
+  "National ID is required.": "National ID is required.",
+  "Age is required.": "Age is required.",
+  "Success": "Success",
+  "The student has been updated.": "The student has been updated.",
+  "Error": "Error",
+  "There was an error updating the student.": "There was an error updating the student.",
+  "Oops...": "Oops...",
+  "Something went wrong!": "Something went wrong!",
+  "OK": "OK",
+  "SUCCESS": "Success",
+ 
+  "SOMETHING_WENT_WRONG": "Something went wrong!",
+  "STUDENT_ADDED_SUCCESSFULLY": "Student added successfully!",
+  "STUDENT_ADDITION_FAILED": "Failed to add student."
+
 }
