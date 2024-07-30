@@ -29,11 +29,10 @@ export class EditStudentComponent implements OnInit {
     private _router: Router,
     private _studentService: StudentService,
     private _translateService: TranslateService
-  ) {
-    this.studentId = Number(this.route.snapshot.paramMap.get('id'));
-  }
+  ) {}
 
   ngOnInit() {
+    this.studentId = Number(this.route.snapshot.paramMap.get('id'));
     const lang = localStorage.getItem('language') || 'en';
     this._translateService.setDefaultLang(lang);
     this._translateService.use(lang);
