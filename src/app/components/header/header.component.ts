@@ -2,28 +2,59 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { FormsModule } from '@angular/forms'; // Import FormsModule for ngModel
+import { LanguageService } from '../../services/language.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule, FormsModule, TranslateModule],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css',
+  styleUrls: ['./header.component.css'], // Fixed typo from styleUrl to styleUrls
 })
 export class HeaderComponent implements OnInit {
-  constructor(private _AuthService: AuthService, private router:Router) {}
-  IsLogin: boolean = false;
-  FullName: string = ' System User';
+
+  selectedLanguage: string = '';
+  isLogin: boolean = false;
+  systemUser: string = 'System User';
   profileImageUrl: string = '../../../assets/Images/download.png';
+
+  constructor(
+    private authService: AuthService, 
+    private router: Router,
+    private languageService: LanguageService,
+    private translateService: TranslateService
+  ) {}
+
   ngOnInit(): void {
-    this._AuthService.getIsLoggedIn().subscribe((isLoggedIn) => {
-      this.IsLogin = isLoggedIn;
+    this.selectedLanguage = localStorage.getItem('language') || 'en';
+    this.languageService.setLanguage(this.selectedLanguage);
+    this.translateService.use(this.selectedLanguage);
+
+    this.authService.getIsLoggedIn().subscribe(isLoggedIn => {
+      this.isLogin = isLoggedIn;
     });
   }
 
-  logout() {
+  logout(): void {
+    this.authService.LogOut();
     this.router.navigate(['/home']);
+  }
 
-    this._AuthService.LogOut();
+  changeLanguage(event: Event): void {
+    const selectedLang = (event.target as HTMLSelectElement).value;
+    this.selectedLanguage = selectedLang;
+    this.storeLanguage(selectedLang);
+    this.updateLanguage(selectedLang);
+  }
+
+  private storeLanguage(language: string): void {
+    localStorage.setItem('language', language);
+  }
+
+  private updateLanguage(language: string): void {
+    this.languageService.setLanguage(language);
+    this.translateService.use(language);
   }
 }

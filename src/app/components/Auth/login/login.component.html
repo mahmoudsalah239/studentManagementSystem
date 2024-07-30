@@ -1,34 +1,40 @@
 <div class="container row my-2 align-items-center justify-content-center">
-    <div class="col col-12 col-md-6 ">
-      <img  src="../../../../assets/Images/Rgister.jpg" alt="Register Image" class="register-image w-100" />
-    </div>
+  
     
     <div class=" col col-12 col-md-6 ">
       <form [formGroup]="Loginform" (ngSubmit)="onSubmit()">
-        <h2>login</h2>
+        <h2 class="fw-bold text-center my-3">{{"Login"|translate}}</h2>
           <div>
-          <label for="UserName">Username</label>
+          <label for="UserName">{{"UserName"|translate}}</label>
           <input id="UserName" formControlName="UserName" class="form-control" />
           <div *ngIf="Loginform.controls.UserName.invalid && Loginform.controls.UserName.touched" class="error">
-            Username is required.
+           {{"UserName is required"|translate}}
           </div>
         </div>
   
         <div>
-          <label for="Password">Password</label>
+          <label for="Password">{{"Password"|translate}}</label>
           <input id="Password" type="password" formControlName="Password" class="form-control" />
           <div *ngIf="Loginform.controls.Password.invalid && Loginform.controls.Password.touched" class="error">
-            <div *ngIf="Loginform.controls.Password.errors?.['required']">Password is required.</div>
-            <div *ngIf="Loginform.controls.Password.errors?.['minlength']">Password must be at least 6 characters long.</div>
+            <div *ngIf="Loginform.controls.Password.errors?.['required']">{{"Password is required"|translate}}</div>
+            <div *ngIf="Loginform.controls.Password.errors?.['minlength']">{{"Password must be at least 6 characters long"|translate}}</div>
           </div>
         </div>
   
-     
-        <button type="submit" [disabled]="Loginform.invalid || isLoading" class="btn">
+     <div class="d-flex align-items-center">
+ <button type="submit" [disabled]="Loginform.invalid || isLoading" class="btn">
             <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-            <span class="btn-text" *ngIf="!isLoading">Login</span>
-            <span class="btn-text" *ngIf="isLoading">Loading...</span>
+            <span class="btn-text" *ngIf="!isLoading">{{'Login'|translate}}</span>
+            <span class="btn-text" *ngIf="isLoading">{{"Loading..."|translate}}</span>
           </button>
+        <span class="mx-2"> {{"Don't have an account?"|translate}}</span> 
+          <a routerLink="/register" class="mx-1">{{"Sign up"|translate}}</a>
+     </div>
+       
       </form>
+    </div>
+
+    <div class="col col-12 col-md-6 ">
+      <img  src="../../../../assets/Images/Rgister.jpg" alt="Register Image" class="register-image w-100" />
     </div>
   </div>

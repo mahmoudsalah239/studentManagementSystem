@@ -6,11 +6,11 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
-
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-student-list',
   standalone: true,
-  imports: [SpinnerComponent, CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [SpinnerComponent, CommonModule, ReactiveFormsModule, FormsModule,TranslateModule],
   templateUrl: './student-list.component.html',
   styleUrls: ['./student-list.component.css'], // Fix styleUrls here
 })
@@ -26,11 +26,15 @@ export class StudentListComponent implements OnInit {
     private _StudentService: StudentService,
     private fb: FormBuilder,
     private router: Router,
-    private elRef: ElementRef
+    private elRef: ElementRef,
+    private _translateService: TranslateService
   ) {}
 
   ngOnInit(): void {
     this.getAllStudent();
+    const lang = localStorage.getItem('language') || 'en';
+    this._translateService.setDefaultLang(lang);
+    this._translateService.use(lang);
   }
 
   getAllStudent() {
