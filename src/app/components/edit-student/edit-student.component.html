@@ -5,80 +5,92 @@
       <img src="../../../assets/Images/download.png" class="w-50 m-auto rounded rounded-circle" alt="">
     </div>
     <div class="row">
-      <div class="col-md-6 mb-3">
+      <div class="col-12 mb-3">
         <label for="ID" class="form-label">{{'ID'|translate}}</label>
-        <input type="text" id="ID" class="form-control" [formControl]="editStudentForm.controls.ID" placeholder="Student ID" [ngClass]="{'is-invalid': editStudentForm.controls.ID.invalid && (editStudentForm.controls.ID.dirty || editStudentForm.controls.ID.touched)}">
-        <div *ngIf="editStudentForm.controls.ID.invalid && (editStudentForm.controls.ID.dirty || editStudentForm.controls.ID.touched)" class="invalid-feedback">
+        <input type="text" id="ID" class="form-control" [formControl]="editStudentForm.controls.ID"
+          placeholder="Student ID" [ngClass]="{'is-invalid':isFieldInvalid(editStudentForm.controls.ID)}">
+        <div *ngIf="isFieldInvalid(editStudentForm.controls.ID)"  class="error">
           {{'ID is required.'|translate}}
         </div>
       </div>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="NameArabic" class="form-label">{{"Name (Arabic)" | translate}}</label>
+          <input type="text" id="NameArabic" class="form-control" [formControl]="editStudentForm.controls.NameArabic"
+            placeholder="Name in Arabic" [ngClass]="{'is-invalid': isFieldInvalid(editStudentForm.controls.NameArabic)}" />
+          <div *ngIf="isFieldInvalid(editStudentForm.controls.NameArabic)" class="error">
+            {{'Name in Arabic is required.' | translate}}
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="NameEnglish" class="form-label">{{"Name (English)"|translate}}</label>
+          <input type="text" id="NameEnglish" class="form-control" [formControl]="editStudentForm.controls.NameEnglish"
+            placeholder="Name in English" [ngClass]="{'is-invalid':isFieldInvalid(editStudentForm.controls.NameEnglish)}">
+          <div *ngIf="isFieldInvalid(editStudentForm.controls.NameEnglish)" class="error">
+            {{'Name in English is required.'|translate}}
+          </div>
+        </div>
+      </div>
+   
+    </div>
+    <div class="row">
       <div class="col-md-6 mb-3">
-        <label for="NameEnglish" class="form-label">{{"Name (English)"|translate}}</label>
-        <input type="text" id="NameEnglish" class="form-control" [formControl]="editStudentForm.controls.NameEnglish" placeholder="Name in English" [ngClass]="{'is-invalid': editStudentForm.controls.NameEnglish.invalid && (editStudentForm.controls.NameEnglish.dirty || editStudentForm.controls.NameEnglish.touched)}">
-        <div *ngIf="editStudentForm.controls.NameEnglish.invalid && (editStudentForm.controls.NameEnglish.dirty || editStudentForm.controls.NameEnglish.touched)" class="invalid-feedback">
-          {{'Name in English is required.'|translate}}
+        <label for="FirstName" class="form-label">{{"First Name" | translate}}</label>
+        <input type="text" id="FirstName" class="form-control" [formControl]="editStudentForm.controls.FirstName"
+          placeholder="First Name" [ngClass]="{'is-invalid': isFieldInvalid(editStudentForm.controls.FirstName)}" />
+        <div *ngIf="isFieldInvalid(editStudentForm.controls.FirstName)" class="error">
+          {{'First Name is required.' | translate}}
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="LastName" class="form-label">{{"Last Name" | translate}}</label>
+        <input type="text" id="LastName" class="form-control" [formControl]="editStudentForm.controls.LastName"
+          placeholder="Last Name" [ngClass]="{'is-invalid': isFieldInvalid(editStudentForm.controls.FirstName)}" />
+        <div *ngIf="isFieldInvalid(editStudentForm.controls.FirstName)" class="error">
+          {{'Last Name is required.' | translate}}
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-md-6 mb-3">
-        <label for="NameArabic" class="form-label">{{"Name (Arabic)"|translate}}</label>
-        <input type="text" id="NameArabic" class="form-control" [formControl]="editStudentForm.controls.NameArabic" placeholder="Name in Arabic" [ngClass]="{'is-invalid': editStudentForm.controls.NameArabic.invalid && (editStudentForm.controls.NameArabic.dirty || editStudentForm.controls.NameArabic.touched)}">
-        <div *ngIf="editStudentForm.controls.NameArabic.invalid && (editStudentForm.controls.NameArabic.dirty || editStudentForm.controls.NameArabic.touched)" class="invalid-feedback">
-          {{'Name in Arabic is required.'|translate}}
+        <label for="Mobile" class="form-label">{{"Mobile" | translate}}</label>
+        <input type="text" id="Mobile" class="form-control" [formControl]="editStudentForm.controls.Mobile"
+          placeholder="Mobile Number" [ngClass]="{'is-invalid': isFieldInvalid(editStudentForm.controls.Mobile)}" />
+        <div *ngIf="isFieldInvalid(editStudentForm.controls.Mobile)" class="error">
+          {{'Mobile Number is required.' | translate}}
         </div>
       </div>
       <div class="col-md-6 mb-3">
-        <label for="FirstName" class="form-label">{{"First Name"|translate}}</label>
-        <input type="text" id="FirstName" class="form-control" [formControl]="editStudentForm.controls.FirstName" placeholder="First Name" [ngClass]="{'is-invalid': editStudentForm.controls.FirstName.invalid && (editStudentForm.controls.FirstName.dirty || editStudentForm.controls.FirstName.touched)}">
-        <div *ngIf="editStudentForm.controls.FirstName.invalid && (editStudentForm.controls.FirstName.dirty || editStudentForm.controls.FirstName.touched)" class="invalid-feedback">
-          {{'First Name is required.'|translate}}
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6 mb-3">
-        <label for="LastName" class="form-label">{{"Last Name"|translate}}</label>
-        <input type="text" id="LastName" class="form-control" [formControl]="editStudentForm.controls.LastName" placeholder="Last Name" [ngClass]="{'is-invalid': editStudentForm.controls.LastName.invalid && (editStudentForm.controls.LastName.dirty || editStudentForm.controls.LastName.touched)}">
-        <div *ngIf="editStudentForm.controls.LastName.invalid && (editStudentForm.controls.LastName.dirty || editStudentForm.controls.LastName.touched)" class="invalid-feedback">
-          {{'Last Name is required.'|translate}}
-        </div>
-      </div>
-      <div class="col-md-6 mb-3">
-        <label for="Mobile" class="form-label">{{"Mobile"|translate}}</label>
-        <input type="text" id="Mobile" class="form-control" [formControl]="editStudentForm.controls.Mobile" placeholder="Mobile Number" [ngClass]="{'is-invalid': editStudentForm.controls.Mobile.invalid && (editStudentForm.controls.Mobile.dirty || editStudentForm.controls.Mobile.touched)}">
-        <div *ngIf="editStudentForm.controls.Mobile.invalid && (editStudentForm.controls.Mobile.dirty || editStudentForm.controls.Mobile.touched)" class="invalid-feedback">
-          {{'Mobile Number is required.'|translate}}
+        <label for="Email" class="form-label">{{"Email" | translate}}</label>
+        <input type="email" id="Email" class="form-control" [formControl]="editStudentForm.controls.Email"
+          placeholder="Email Address" [ngClass]="{'is-invalid': isFieldInvalid(editStudentForm.controls.Email)}" />
+        <div *ngIf="isFieldInvalid(editStudentForm.controls.Email)">
+          {{'Email is required and must be a valid email.' | translate}}
         </div>
       </div>
     </div>
+    
     <div class="row">
       <div class="col-md-6 mb-3">
-        <label for="Email" class="form-label">{{"Email"|translate}}</label>
-        <input type="email" id="Email" class="form-control" [formControl]="editStudentForm.controls.Email" placeholder="Email Address" [ngClass]="{'is-invalid': editStudentForm.controls.Email.invalid && (editStudentForm.controls.Email.dirty || editStudentForm.controls.Email.touched)}">
-        <div *ngIf="editStudentForm.controls.Email.invalid && (editStudentForm.controls.Email.dirty || editStudentForm.controls.Email.touched)" class="invalid-feedback">
-          {{'Email is required and must be a valid email.'|translate}}
+        <label for="NationalID" class="form-label">{{"National ID" | translate}}</label>
+        <input type="text" id="NationalID" class="form-control" [formControl]="editStudentForm.controls.NationalID"
+          placeholder="National ID" [ngClass]="{'is-invalid': isFieldInvalid(editStudentForm.controls.NationalID)}" />
+        <div *ngIf="isFieldInvalid(editStudentForm.controls.NationalID)" class="error">
+          {{'National ID is required.' | translate}}
         </div>
       </div>
       <div class="col-md-6 mb-3">
-        <label for="NationalID" class="form-label">{{"National ID"|translate}}</label>
-        <input type="text" id="NationalID" class="form-control" [formControl]="editStudentForm.controls.NationalID" placeholder="National ID" [ngClass]="{'is-invalid': editStudentForm.controls.NationalID.invalid && (editStudentForm.controls.NationalID.dirty || editStudentForm.controls.NationalID.touched)}">
-        <div *ngIf="editStudentForm.controls.NationalID.invalid && (editStudentForm.controls.NationalID.dirty || editStudentForm.controls.NationalID.touched)" class="invalid-feedback">
-          {{'National ID is required.'|translate}}
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6 mb-3">
-        <label for="Age" class="form-label">{{"Age"|translate}}</label>
-        <input type="number" id="Age" class="form-control" [formControl]="editStudentForm.controls.Age" placeholder="Age" [ngClass]="{'is-invalid': editStudentForm.controls.Age.invalid && (editStudentForm.controls.Age.dirty || editStudentForm.controls.Age.touched)}">
-        <div *ngIf="editStudentForm.controls.Age.invalid && (editStudentForm.controls.Age.dirty || editStudentForm.controls.Age.touched)" class="invalid-feedback">
-          {{'Age is required.'|translate}}
+        <label for="Age" class="form-label">{{"Age" | translate}}</label>
+        <input type="number" id="Age" class="form-control" [formControl]="editStudentForm.controls.Age"
+          placeholder="Age" [ngClass]="{'is-invalid': isFieldInvalid(editStudentForm.controls.Age)}" />
+        <div *ngIf="isFieldInvalid(editStudentForm.controls.Age)" class="error">
+          {{'Age is required.' | translate}}
         </div>
       </div>
     </div>
     <div class="d-flex justify-content-center">
-      <button type="submit" class="btn btn-custom" [disabled]="editStudentForm.invalid">{{"Save Changes"|translate}}</button>
+      <button type="submit" class="btn btn-custom">
+       {{"Save Changes"|translate}}</button>
       <button class="btn btn-secondary mx-2" routerLink="/student">{{"Back"|translate}}</button>
     </div>
   </form>

@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
+  FormControl,
   FormGroup,
   ReactiveFormsModule,
   ValidationErrors,
@@ -56,6 +57,7 @@ export class RegisterComponent {
 
   onSubmit() {
     if (this.RegisterForm.invalid) {
+      this.RegisterForm.markAllAsTouched();
       return;
     }
 
@@ -99,5 +101,10 @@ export class RegisterComponent {
         console.error(err);
       },
     });
+  }
+
+  isFieldInvalid(control: FormControl): boolean {
+   
+    return control?.invalid && (control?.touched || control?.dirty);
   }
 }

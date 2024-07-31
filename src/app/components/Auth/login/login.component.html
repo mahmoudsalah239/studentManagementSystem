@@ -6,7 +6,7 @@
       <div>
         <label for="UserName">{{ 'UserName' | translate }}</label>
         <input id="UserName" [formControl]="Loginform.controls.UserName" class="form-control" 
-        [ngClass]="{'is-invalid': Loginform.controls.UserName.invalid && (Loginform.controls.UserName.dirty || Loginform.controls.UserName.touched)}" />
+        [ngClass]="{'is-invalid': isFieldInvalid(Loginform.controls.UserName)}" />
         <div *ngIf="isFieldInvalid(Loginform.controls.UserName)" class="error">
           {{ 'UserName is required' | translate }}
         </div>
@@ -14,7 +14,8 @@
 
       <div>
         <label for="Password">{{ 'Password' | translate }}</label>
-        <input id="Password" type="password" [formControl]="Loginform.controls.Password" class="form-control"  [ngClass]="{'is-invalid': Loginform.controls.Password.invalid && (Loginform.controls.Password.dirty || Loginform.controls.Password.touched)}" />
+        <input id="Password" type="password" [formControl]="Loginform.controls.Password" class="form-control" 
+         [ngClass]="{'is-invalid':isFieldInvalid(Loginform.controls.Password)}" />
         <div *ngIf="isFieldInvalid(Loginform.controls.Password)" class="error">
           <div *ngIf="Loginform.controls.Password.errors?.['required']">{{ 'Password is required' | translate }}</div>
           <div *ngIf="Loginform.controls.Password.errors?.['minlength']">{{ 'Password must be at least 6 characters long' | translate }}</div>
