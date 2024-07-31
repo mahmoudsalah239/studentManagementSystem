@@ -12,7 +12,7 @@ Welcome to the **Student Management System**! This application is built using An
 
 The project is organized into the following key directories:
 
-- **`src/`**: Contains all source files.
+- **`src/`**: Contains all source files. 
 
   - **`components/`**: Contains all Angular components.
     - **`home/`**: The landing page component.
