@@ -1,19 +1,15 @@
 <div class="container my-2 ">
-    <div class="d-flex justify-content-center align-items-center ">
-        <div class="col col-12 col-md-6 d-flex justify-content-center">
-            <input 
-              type="text" 
-              class="form-control w-75 border-warning" 
-              placeholder="Search for student..."
-              [(ngModel)]="searchQuery" 
-              (input)="onSearch()"
-            >
+    <div class="row justify-content-center align-items-center ">
+        <div class="col col-12 col-md-6 d-flex justify-content-center my-2 ">
+            <input type="text" class="form-control w-75 border-warning" placeholder="Search for student..."
+                [(ngModel)]="searchQuery" (input)="onSearch()">
         </div>
-        <div class="col col-12 col-md-6 d-flex justify-content-end">
+        <div class="col col-12 col-md-6 d-flex justify-content-end ">
             <a class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#studentModal">
                 <i class="fas fa-plus"></i> {{'Add new student'|translate}}
             </a>
         </div>
+        
     </div>
 </div>
 
@@ -25,13 +21,13 @@
 <div *ngIf="filteredStudents.length > 0; else noData" class="container mt-3">
     <div class="card shadow-sm border-light">
         <div class="card-header bg-secondary text-white">
-            <h4>{{'Student List'|translate}}</h4>
+            <h4>{{'Student List'|translate}}  ({{filteredStudents.length}})</h4>
         </div>
         <div class="card-body">
             <table class="table table-hover table-striped table-borderless">
                 <thead>
                     <tr>
-                        
+
                         <th>{{'Name'|translate}}</th>
                         <th>{{'Mobile'|translate}}</th>
                         <th>{{'Email'|translate}}</th>
@@ -40,7 +36,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let student of filteredStudents; let i=index">     
+                    <tr *ngFor="let student of filteredStudents; let i=index">
                         <td>{{ student.Name }}</td>
                         <td>{{ student.Mobile }}</td>
                         <td>{{ student.Email }}</td>
@@ -48,7 +44,7 @@
                         <td class="text-center">
                             <button class="btn btn-outline-warning btn-sm mx-1" (click)="editStudent(student.ID)">
                                 <i class="fas fa-edit"></i>
-                            </button> 
+                            </button>
                             <button class="btn btn-outline-danger btn-sm mx-1" (click)="DeleteStudent(student.ID)">
                                 <i class="fas fa-trash-alt"></i>
                             </button>
@@ -62,7 +58,8 @@
 
 <!-- No Data Template -->
 <ng-template #noData>
-    <div *ngIf="!isloading" class="container mt-3 d-flex flex-column align-items-center justify-content-center text-warning">
+    <div *ngIf="!isloading"
+        class="container mt-3 d-flex flex-column align-items-center justify-content-center text-warning">
         <h2>No students found &#9785;</h2>
         <img class="w-25" src="../../../assets/Images/NotFound.webp" alt="">
     </div>
@@ -85,14 +82,15 @@
             <div class="modal-body">
                 <form [formGroup]="AddStudentFrom" (ngSubmit)="onSubmit()">
                     <div class="text-center my-0 w-25 m-auto ">
-                        <img src="../../../assets/Images/download.png" class="w-50  m-auto rounded rounded-circle" alt="">
-                      </div>
+                        <img src="../../../assets/Images/download.png" class="w-50  m-auto rounded rounded-circle"
+                            alt="">
+                    </div>
                     <div class="mb-3">
                         <label for="FirstName" class="form-label">{{"FirstName" | translate}}</label>
                         <input type="text" class="form-control" formControlName="FirstName" placeholder="" required>
                         <div *ngIf="AddStudentFrom.controls.FirstName.invalid && 
-                                    (AddStudentFrom.controls.FirstName.dirty || AddStudentFrom.controls.FirstName.touched)" 
-                             class="text-danger">
+                                    (AddStudentFrom.controls.FirstName.dirty || AddStudentFrom.controls.FirstName.touched)"
+                            class="text-danger">
                             {{'FirstName is required' | translate}}
                         </div>
                     </div>
@@ -100,8 +98,8 @@
                         <label for="LastName" class="form-label">{{"LastName" | translate}}</label>
                         <input type="text" class="form-control" formControlName="LastName" placeholder="" required>
                         <div *ngIf="AddStudentFrom.controls.LastName.invalid && 
-                                    (AddStudentFrom.controls.LastName.dirty || AddStudentFrom.controls.LastName.touched)" 
-                             class="text-danger">
+                                    (AddStudentFrom.controls.LastName.dirty || AddStudentFrom.controls.LastName.touched)"
+                            class="text-danger">
                             {{'LastName is required' | translate}}
                         </div>
                     </div>
@@ -109,8 +107,8 @@
                         <label for="Mobile" class="form-label">{{"Mobile" | translate}}</label>
                         <input type="text" class="form-control" formControlName="Mobile">
                         <div *ngIf="AddStudentFrom.controls.Mobile.invalid && 
-                                    (AddStudentFrom.controls.Mobile.dirty || AddStudentFrom.controls.Mobile.touched)" 
-                             class="text-danger">
+                                    (AddStudentFrom.controls.Mobile.dirty || AddStudentFrom.controls.Mobile.touched)"
+                            class="text-danger">
                             {{'Mobile is required' | translate}}
                         </div>
                     </div>
@@ -118,8 +116,8 @@
                         <label for="Email" class="form-label">{{"Email" | translate}}</label>
                         <input type="email" class="form-control" formControlName="Email">
                         <div *ngIf="AddStudentFrom.controls.Email.invalid && 
-                                    (AddStudentFrom.controls.Email.dirty || AddStudentFrom.controls.Email.touched)" 
-                             class="text-danger">
+                                    (AddStudentFrom.controls.Email.dirty || AddStudentFrom.controls.Email.touched)"
+                            class="text-danger">
                             {{'Invalid email address' | translate}}
                         </div>
                     </div>
@@ -127,8 +125,8 @@
                         <label for="NationalID" class="form-label">{{"National ID" | translate}}</label>
                         <input type="text" class="form-control" formControlName="NationalID">
                         <div *ngIf="AddStudentFrom.controls.NationalID.invalid && 
-                                    (AddStudentFrom.controls.NationalID.dirty || AddStudentFrom.controls.NationalID.touched)" 
-                             class="text-danger">
+                                    (AddStudentFrom.controls.NationalID.dirty || AddStudentFrom.controls.NationalID.touched)"
+                            class="text-danger">
                             {{'National ID is required' | translate}}
                         </div>
                     </div>
@@ -136,14 +134,15 @@
                         <label for="Age" class="form-label">{{"Age" | translate}}</label>
                         <input type="number" class="form-control" formControlName="Age">
                         <div *ngIf="AddStudentFrom.controls.Age.invalid && 
-                                    (AddStudentFrom.controls.Age.dirty || AddStudentFrom.controls.Age.touched)" 
-                             class="text-danger">
+                                    (AddStudentFrom.controls.Age.dirty || AddStudentFrom.controls.Age.touched)"
+                            class="text-danger">
                             {{'Age is required' | translate}}
                         </div>
                     </div>
-                    
-                    <button type="submit" data-bs-dismiss="modal" class="btn btn-primary" [disabled]="AddStudentFrom.invalid || isSubmitting">
-                        <span *ngIf="isSubmitting" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="AddStudentFrom.invalid || isSubmitting">
+                        <span *ngIf="isSubmitting" class="spinner-border spinner-border-sm" role="status"
+                            aria-hidden="true"></span>
                         {{ isSubmitting ? ('Submitting' | translate) : ('Add Student' | translate) }}
                     </button>
                 </form>
