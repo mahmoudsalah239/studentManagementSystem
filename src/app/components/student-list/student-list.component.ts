@@ -12,8 +12,6 @@ import {
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
-import * as bootstrap from 'bootstrap';
-
 @Component({
   selector: 'app-student-list',
   standalone: true,
@@ -83,7 +81,7 @@ modal:any;
       return;
     }
 
-    this.isSubmitting = true; // Start spinner
+    this.isSubmitting = true; 
 
     const data: IAddStudent = {
       FirstName: String(this.AddStudentFrom.controls.FirstName?.value),
@@ -96,7 +94,7 @@ modal:any;
 
     this._StudentService.addStudent(data).subscribe({
       next: (res) => {
-        this.isSubmitting = false; // Stop spinner
+        this.isSubmitting = false; 
         if (res.Success) {
           Swal.fire({
             icon: 'success',
@@ -105,19 +103,7 @@ modal:any;
             confirmButtonText: this._translateService.instant('OK'),
           }).then(() => {
             this.getAllStudent();
-            // const modalElement = document.getElementById('studentModal');         
-            const modalElement = document.getElementById('studentModal');
-            if (modalElement) {
-              const modal = bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement);
-              modal.hide(); // Hide the modal
-            }
-
-            // Reset form fields
             this.AddStudentFrom.reset();
-
-            // Navigate to StudentListComponent
-            // this.router.navigate(['/student']);
-            // this.getAllStudent();
           });
         } else {
           Swal.fire({
@@ -125,17 +111,11 @@ modal:any;
             title: this._translateService.instant('Error'),
             text: res.Message,
             confirmButtonText: this._translateService.instant('OK'),
-          }).then(() => {
-  
-            const modalElement = document.getElementById('studentModal');
-            if (modalElement) {
-              const modal = bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement);
-              modal.show();
-          }});;
+          })
         }
       },
       error: (err) => {
-        this.isSubmitting = false; // Stop spinner
+        this.isSubmitting = false; 
         console.error(err);
         Swal.fire({
           icon: 'error',
