@@ -17,45 +17,69 @@
     <app-spinner></app-spinner>
 </div>
 
-
 <div *ngIf="filteredStudents.length > 0; else noData" class="container mt-3">
     <div class="card shadow-sm border-light">
         <div class="card-header bg-secondary text-white">
-            <h4>{{'Student List'|translate}}  ({{filteredStudents.length}})</h4>
+            <h4>{{'Student List' | translate}} ({{filteredStudents.length}})</h4>
         </div>
         <div class="card-body">
-            <table class="table table-hover table-striped table-borderless">
-                <thead>
-                    <tr>
+            <!-- Desktop/Table View -->
+            <div class="d-none d-md-block">
+                <table class="table table-hover table-striped table-borderless">
+                    <thead>
+                        <tr>
+                            <th>{{'Name' | translate}}</th>
+                            <th>{{'Mobile' | translate}}</th>
+                            <th>{{'Email' | translate}}</th>
+                            <th>{{'National ID' | translate}}</th>
+                            <th>{{'Actions' | translate}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let student of filteredStudents; let i=index">
+                            <td>{{ student.Name }}</td>
+                            <td>{{ student.Mobile }}</td>
+                            <td>{{ student.Email }}</td>
+                            <td>{{ student.NationalID }}</td>
+                            <td class="text-center">
+                                <button class="btn btn-outline-warning btn-sm mx-1" (click)="editStudent(student.ID)">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-outline-danger btn-sm mx-1" (click)="DeleteStudent(student.ID)">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-                        <th>{{'Name'|translate}}</th>
-                        <th>{{'Mobile'|translate}}</th>
-                        <th>{{'Email'|translate}}</th>
-                        <th>{{'National ID'|translate}}</th>
-                        <th>{{'Actions'|translate}}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let student of filteredStudents; let i=index">
-                        <td>{{ student.Name }}</td>
-                        <td>{{ student.Mobile }}</td>
-                        <td>{{ student.Email }}</td>
-                        <td>{{ student.NationalID }}</td>
-                        <td class="text-center">
-                            <button class="btn btn-outline-warning btn-sm mx-1" (click)="editStudent(student.ID)">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="btn btn-outline-danger btn-sm mx-1" (click)="DeleteStudent(student.ID)">
-                                <i class="fas fa-trash-alt"></i>
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <!-- Mobile/Card View -->
+            <div class="d-block d-md-none">
+                <div class="row">
+                    <div class="col-12 mb-3" *ngFor="let student of filteredStudents">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ student.Name }}</h5>
+                                <p class="card-text"><strong>{{'Mobile' | translate}}:</strong> {{ student.Mobile }}</p>
+                                <p class="card-text"><strong>{{'Email' | translate}}:</strong> {{ student.Email }}</p>
+                                <p class="card-text"><strong>{{'National ID' | translate}}:</strong> {{ student.NationalID }}</p>
+                                <div class="d-flex justify-content-between">
+                                    <button class="btn btn-outline-warning btn-sm" (click)="editStudent(student.ID)">
+                                        <i class="fas fa-edit"></i> {{'Edit' | translate}}
+                                    </button>
+                                    <button class="btn btn-outline-danger btn-sm" (click)="DeleteStudent(student.ID)">
+                                        <i class="fas fa-trash-alt"></i> {{'Delete' | translate}}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
 <!-- No Data Template -->
 <ng-template #noData>
     <div *ngIf="!isloading"

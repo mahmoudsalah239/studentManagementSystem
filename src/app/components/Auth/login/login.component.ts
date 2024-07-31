@@ -2,14 +2,14 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import {
   FormBuilder,
-  FormsModule,
+  FormControl,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import Swal from 'sweetalert2';
 import { Router, RouterLink } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -17,15 +17,17 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [ReactiveFormsModule, CommonModule, TranslateModule, RouterLink],
 
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
   Loginform = this.initloginFrom();
   isLoading: boolean = false;
+
   constructor(
     private fb: FormBuilder,
     private _AuthService: AuthService,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService // Inject TranslateService
   ) {}
 
   initloginFrom() {
@@ -40,6 +42,7 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.Loginform.invalid) {
+      this.Loginform.markAllAsTouched(); // Mark all fields as touched to show validation errors
       return;
     }
 
@@ -48,7 +51,6 @@ export class LoginComponent {
       UserName: this.Loginform.controls.UserName.value,
       Password: this.Loginform.controls.Password.value,
     };
-    console.log(Data);
 
     this._AuthService.Login(Data).subscribe({
       next: (res: any) => {
@@ -61,21 +63,12 @@ export class LoginComponent {
             String(this.Loginform.controls.UserName.value)
           );
           this.router.navigate(['/student']);
-          // Swal.fire({
-          //   icon: 'success',
-          //   title: 'Success',
-          //   text: res.Message,
-
-          // }).then(() => {
-          //   this._AuthService.saveToken(res.Data);
-          //   this.router.navigate(['/student']);
-          // });
         } else {
           Swal.fire({
             icon: 'error',
-            title: 'Error',
+            title: this.translate.instant('Error'),
             text: res.Message,
-            confirmButtonText: 'OK',
+            confirmButtonText: this.translate.instant('OK'),
           });
         }
       },
@@ -83,12 +76,18 @@ export class LoginComponent {
         this.isLoading = false;
         Swal.fire({
           icon: 'error',
-          title: 'Oops...',
-          text: 'Something went wrong!',
-          confirmButtonText: 'OK',
+          title: this.translate.instant('Oops...'),
+          text: this.translate.instant('Something went wrong!'),
+          confirmButtonText: this.translate.instant('OK'),
         });
         console.error(err);
       },
     });
+  }
+
+  // Helper method to determine if a form control is invalid and touched
+  isFieldInvalid(control: FormControl): boolean {
+   
+    return control?.invalid && (control?.touched || control?.dirty);
   }
 }
