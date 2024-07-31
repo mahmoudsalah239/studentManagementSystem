@@ -64,3 +64,29 @@
     transform: translateX(32px);
   }
 
+  .navbar-brand {
+    display: flex;
+    align-items: center;
+    color: transparent;
+    font-family: 'Arial', sans-serif;
+    text-decoration: none;
+    background: linear-gradient(90deg, #5f9cff, #765191);
+    -webkit-background-clip: text;
+    background-clip: text;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .navbar-brand img {
+    margin-right: 10px;
+    border-radius: 50%;
+  }
+  
+  .navbar-brand:hover {
+    color: #007bff;
+  }
+  
+  .navbar-brand img:hover {
+    opacity: 0.8;
+  }
+  
