@@ -5,6 +5,7 @@ import { IAddStudent, IStudent } from '../../core/interfaces/istudent';
 import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
+  FormControl,
   FormsModule,
   ReactiveFormsModule,
   Validators,
@@ -33,7 +34,7 @@ export class StudentListComponent implements OnInit {
   studentlist: IStudent[] = [];
   AddStudentFrom = this.initAddStudentForm();
   isSubmitting: boolean = false;
-modal:any;
+  showModal = true;
   constructor(
     private _StudentService: StudentService,
     private fb: FormBuilder,
@@ -78,6 +79,7 @@ modal:any;
 
   onSubmit() {
     if (this.AddStudentFrom.invalid) {
+      this.AddStudentFrom.markAllAsTouched()
       return;
     }
 
@@ -102,8 +104,10 @@ modal:any;
             text: res.Message,
             confirmButtonText: this._translateService.instant('OK'),
           }).then(() => {
-            this.getAllStudent();
             this.AddStudentFrom.reset();
+            this.showModal = false;
+            this.getAllStudent();
+            window.location.reload();
           });
         } else {
           Swal.fire({
@@ -185,5 +189,11 @@ modal:any;
         student.NationalID.includes(query) ||
         student.Age.toString().includes(query)
     );
+  }
+
+
+  isFieldInvalid(control: FormControl): boolean {
+   
+    return control?.invalid && (control?.touched || control?.dirty);
   }
 }
