@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
+  FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
@@ -71,6 +72,10 @@ export class EditStudentComponent implements OnInit {
   }
 
   onSubmit() {
+    if(this.editStudentForm.invalid){
+      this.editStudentForm.markAllAsTouched();
+      return;
+    }
     const Data = {
       NameArabic: this.editStudentForm.controls.NameArabic.value,
       NameEnglish: this.editStudentForm.controls.NameEnglish.value,
@@ -132,5 +137,10 @@ export class EditStudentComponent implements OnInit {
           });
       },
     });
+  }
+  
+  isFieldInvalid(control: FormControl): boolean {
+   
+    return control?.invalid && (control?.touched || control?.dirty);
   }
 }
