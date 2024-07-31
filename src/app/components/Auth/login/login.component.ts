@@ -85,7 +85,6 @@ export class LoginComponent {
     });
   }
 
-  // Helper method to determine if a form control is invalid and touched
   isFieldInvalid(control: FormControl): boolean {
    
     return control?.invalid && (control?.touched || control?.dirty);

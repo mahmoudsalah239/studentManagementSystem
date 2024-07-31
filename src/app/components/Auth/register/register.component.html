@@ -1,58 +1,61 @@
 <div class="container row my-2 align-items-center justify-content-center">
- 
-    
-    <div class=" col col-12 col-md-6 ">
-      <form [formGroup]="RegisterForm" (ngSubmit)="onSubmit()">
-        <h2 class="fw-bold text-center">{{"Register"|translate}}</h2>
-  
-        <div>
-          <label for="Name">{{"Name"|translate}}</label>
-          <input id="Name" [formControl]="RegisterForm.controls.Name" class="form-control" />
-          <div *ngIf="RegisterForm.controls.Name.invalid && RegisterForm.controls.Name.touched" class="error">
-           {{"Name is required"|translate}}
-          </div>
-        </div>
-  
-        <div>
-          <label for="UserName">{{"UserName"|translate}}</label>
-          <input id="UserName" formControlName="UserName" class="form-control" />
-          <div *ngIf="RegisterForm.get('UserName')?.invalid && RegisterForm.get('UserName')?.touched" class="error">
-            {{"UserName is required"|translate}}
-          </div>
-        </div>
-  
-        <div>
-          <label for="Password">{{"Password"|translate}}</label>
-          <input id="Password" type="password" formControlName="Password" class="form-control" />
-          <div *ngIf="RegisterForm.get('Password')?.invalid && RegisterForm.get('Password')?.touched" class="error">
-            <div *ngIf="RegisterForm.get('Password')?.errors?.['required']">{{"Password is required"|translate}}</div>
-            <div *ngIf="RegisterForm.get('Password')?.errors?.['minlength']">{{"Password must be at least 6 characters long"|translate}}</div>
-          </div>
-        </div>
-  
-        <div>
-          <label for="ConfirmPassword">{{"Confirm Password"|translate}}</label>
-          <input id="ConfirmPassword" type="password" formControlName="ConfirmPassword" class="form-control" />
-          <div *ngIf="RegisterForm.hasError('mismatch') && RegisterForm.get('ConfirmPassword')?.touched" class="error">
-            {{"Passwords do not match"|translate}}
-          </div>
-        </div>
-  <div class="d-flex  align-items-center">
 
-  
-        <button type="submit" [disabled]="RegisterForm.invalid || isLoading" class="btn">
-            <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-            <span class="btn-text" *ngIf="!isLoading">{{"Register"|translate}}</span>
-            <span class="btn-text" *ngIf="isLoading">{{"Loading..."|translate}}</span>
-          </button>
-          <span class="mx-2"> {{"Do you have an account?"|translate}}</span> 
-          <a routerLink="/login" class="mx-1">{{"Login"|translate}}</a>
-     </div>
-      </form>
-    </div>
 
-    <div class="col col-12 col-md-6 ">
-      <img  src="../../../../assets/Images/Rgister.jpg" alt="Register Image" class="register-image w-100" />
-    </div>
+  <div class=" col col-12 col-md-6 ">
+    <form [formGroup]="RegisterForm" (ngSubmit)="onSubmit()">
+      <h2 class="fw-bold text-center">{{"Register"|translate}}</h2>
+
+      <div>
+        <label for="Name">{{"Name"|translate}}</label>
+        <input id="Name" [formControl]="RegisterForm.controls.Name" class="form-control"
+          [ngClass]="{'is-invalid': isFieldInvalid(RegisterForm.controls.Name)}" />
+        <div *ngIf="isFieldInvalid(RegisterForm.controls.Name)" class="error">
+          {{"Name is required"|translate}}
+        </div>
+      </div>
+
+      <div>
+        <label for="UserName">{{"UserName"|translate}}</label>
+        <input id="UserName" [formControl]="RegisterForm.controls.UserName" class="form-control"
+          [ngClass]="{'is-invalid':isFieldInvalid(RegisterForm.controls.UserName)}" />
+        <div *ngIf="isFieldInvalid(RegisterForm.controls.UserName)" class="error">
+          {{"UserName is required"|translate}}
+        </div>
+      </div>
+
+      <div>
+        <label for="Password">{{"Password"|translate}}</label>
+        <input id="Password" type="password" [formControl]="RegisterForm.controls.Password" class="form-control"
+          [ngClass]="{'is-invalid':isFieldInvalid(RegisterForm.controls.Password)}" />
+        <div *ngIf="isFieldInvalid(RegisterForm.controls.Password)" class="error">
+          <div *ngIf="RegisterForm.controls.Password?.errors?.['required']">{{"Password is required"|translate}}</div>
+          <div *ngIf="RegisterForm.controls.Password?.errors?.['minlength']">{{"Password must be at least 6 character long"|translate}}</div>
+        </div>
+      </div>
+
+      <div>
+        <label for="ConfirmPassword">{{"Confirm Password"|translate}}</label>
+        <input id="ConfirmPassword" type="password" [formControl]="RegisterForm.controls.ConfirmPassword" class="form-control"
+        [ngClass]="{'is-invalid':isFieldInvalid(RegisterForm.controls.ConfirmPassword)}" />
+        <div *ngIf="RegisterForm.hasError('mismatch') && RegisterForm.controls.ConfirmPassword?.touched" class="error">
+          {{"Passwords do not match"|translate}}
+        </div>
+      </div>
+      <div class="d-flex  align-items-center">
+
+
+        <button type="submit" class="btn">
+          <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          <span class="btn-text" *ngIf="!isLoading">{{"Register"|translate}}</span>
+          <span class="btn-text" *ngIf="isLoading">{{"Loading..."|translate}}</span>
+        </button>
+        <span class="mx-2"> {{"Do you have an account?"|translate}}</span>
+        <a routerLink="/login" class="mx-1">{{"Login"|translate}}</a>
+      </div>
+    </form>
   </div>
-  
+
+  <div class="col col-12 col-md-6 ">
+    <img src="../../../../assets/Images/Rgister.jpg" alt="Register Image" class="register-image w-100" />
+  </div>
+</div>
