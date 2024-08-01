@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {
+  AbstractControl,
   FormBuilder,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
+  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -54,7 +56,7 @@ export class EditStudentComponent implements OnInit {
   }
   initEditStudentForm() {
     return this.fb.group({
-      NameArabic: this.fb.control<string>('', [Validators.required]),
+      NameArabic: this.fb.control<string>('', [Validators.required, this.arabicNameValidator()]),
       NameEnglish: this.fb.control<string>('', [Validators.required]),
       ID: this.fb.control<number>({ value: 0, disabled: true }, [
         Validators.required,
@@ -139,6 +141,12 @@ export class EditStudentComponent implements OnInit {
     });
   }
   
+   arabicNameValidator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: boolean } | null => {
+      const isArabic = /^[\u0600-\u06FF\s]+$/.test(control.value);
+      return isArabic ? null : { 'invalidArabicName': true };
+    };
+  }
   isFieldInvalid(control: FormControl): boolean {
    
     return control?.invalid && (control?.touched || control?.dirty);
