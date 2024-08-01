@@ -12,7 +12,7 @@ Welcome to the **Student Management System**! This application is built using An
 
 The project is organized into the following key directories:
 
-- **`src/`**: Contains all source files. 
+- **`src/`**: Contains all source files.
 
   - **`components/`**: Contains all Angular components.
     - **`home/`**: The landing page component.
@@ -57,7 +57,8 @@ The project is organized into the following key directories:
 
 To get started with the project, follow these steps:
 
-## **live demo ** https://browser-dusky.vercel.app/
+## **live demo ** https://student-ms-one.vercel.app/
+
 1. **Clone the repository**:
 
    ```bash
@@ -66,10 +67,12 @@ To get started with the project, follow these steps:
    ```
 
 2. **Install dependencies**:
+
    ```bash
       npm install
 
    ```
+
 3. **Running the Application Locally**:
    ```bash
       ng serve
