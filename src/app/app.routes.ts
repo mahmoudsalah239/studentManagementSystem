@@ -11,16 +11,13 @@ export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
     path: 'home',
-    loadComponent: () =>
-      import('./components/home/home.component').then((m) => m.HomeComponent),
+    component: HomeComponent,
     title: 'Home',
-  },{
+  },
+  {
     path: 'student',
     canActivate: [authGuard],
-    loadComponent: () =>
-      import('./components/student-list/student-list.component').then(
-        (m) => m.StudentListComponent
-      ),
+    component:StudentListComponent,
     title: 'Students',
   },
   {
