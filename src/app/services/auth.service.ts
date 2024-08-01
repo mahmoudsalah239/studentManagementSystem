@@ -4,14 +4,19 @@ import { environment } from '../../environments/environment.development';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ApiRoutes } from '../core/routers/ApiRoutes';
 
-@Injectable({
+@Injectable({ 
   providedIn: 'root',
 })
 export class AuthService {
   isLoggedIn = new BehaviorSubject<boolean>(this.getToken() != null);
+  systemUser = new BehaviorSubject<string>(localStorage.getItem("systemUser")||"")
+  public   currentUser: Observable<string> = this.systemUser.asObservable();
   private baseUrl: string = environment.apiUrl;
   constructor(private _HttpClient: HttpClient) {}
   Login(data:any):Observable<any> {
+    console.log(data);
+    
+    this.systemUser.next(data.UserName);
     return this._HttpClient.post(`${this.baseUrl}${ApiRoutes.account.login}`,data);
   }
   Register(data:any) {
